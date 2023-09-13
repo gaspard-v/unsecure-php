@@ -1,4 +1,5 @@
 <?php
+include_once("src/requiredMethod.php");
 
 define("GET_PAGE_DEMANDEE", "page");
 
@@ -7,4 +8,4 @@ if(!isset($_GET[GET_PAGE_DEMANDEE])) {
     exit();
 }
 $pageDemandee = $_GET[GET_PAGE_DEMANDEE];
-require_once($pageDemandee);
+RequiredMethod::requireOnce($pageDemandee);
