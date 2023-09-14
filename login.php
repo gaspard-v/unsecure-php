@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulaire de Connexion</title>
+    <title>Login</title>
 </head>
 <body>
-    <h2>Connexion</h2>
-    <form method="POST" action="index.php?page=verificationUtilisateur.php">
+    <h2>Login</h2>
+    <form method="POST" action="index.php?page=checkUser.php">
         <label for="username">Nom d'utilisateur :</label>
         <input type="text" id="username" name="username" required>
         <br><br>

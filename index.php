@@ -1,11 +1,11 @@
 <?php
 include_once("src/requiredMethod.php");
 
-define("GET_PAGE_DEMANDEE", "page");
+define("GET_REQUESTED_PAGE", "page");
 
-if(!isset($_GET[GET_PAGE_DEMANDEE])) {
-    header("Location: index.php?page=connexion.php");
+if(!isset($_GET[GET_REQUESTED_PAGE])) {
+    header("Location: index.php?page=login.php");
     exit();
 }
-$pageDemandee = $_GET[GET_PAGE_DEMANDEE];
-RequiredMethod::requireOnce($pageDemandee);
+$requestedPage = $_GET[GET_REQUESTED_PAGE];
+RequiredMethod::requireOnce($requestedPage);
