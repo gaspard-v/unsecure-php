@@ -23,14 +23,26 @@ abstract class Environment
     static private array $classAssociation = [
         "REQUIRE_METHOD" => _REQUIRE_METHOD::class
     ];
-    static function getEnv($varName, $defined = true, $strict = false): mixed
+
+    static private array $defaultOptions = [
+        "VAR_DEFINED" => false,
+        "VAR_STRICT" => false,
+    ];
+    /**
+     * @param string $varName <p>The name of the environment variable</p>
+     * @param array $option <p>options to change the behavior of the function</p>
+     * @return mixed
+     * 
+     * options is an associative array
+     */
+    static function getEnv(string $varName, array $options = self::$defaultOptions): mixed
     {
         if (!in_array($varName, array_keys(self::$classAssociation))) { // no expected environment variable
-            if ($defined) // varName must be an expected environment variable. Throws an error
-                throw new Exception("varName must be an expected environment variable");
+            if ($options["VAR_DEFINED"]) // varName must be an expected environment variable. Throws an error
+                throw new Exception("$varName must be an expected environment variable");
             if (!isset($_ENV[$varName])) {
-                if ($strict)
-                    throw new Exception("environment variable $varName doest not exist");
+                if ($$options["VAR_STRICT"])
+                    throw new Exception("environment variable $varName does not exist");
                 return false;
             }
             return $_ENV[$varName];
@@ -38,8 +50,12 @@ abstract class Environment
 
         $varClass = self::$classAssociation[$varName];
 
-        if (!isset($_ENV[$varName])) // no environment variable defined, return default
+        if (!isset($_ENV[$varName])) // no environment variable defined, return default if exists, or throws errors
+        {
+            if (!$varClass::$default_values)
+                throw new Exception("environment variable $varName does not have an default value");
             return $varClass::$default_values;
+        }
 
         $varValue = $_ENV[$varName];
 
