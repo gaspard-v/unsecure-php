@@ -22,12 +22,12 @@ $secure_password = password_hash($clear_password, PASSWORD_DEFAULT);
 
 try {
     $conn->beginTransaction();
-    $conn->query($sql);
+    $conn->exec($sql);
     $sql = "INSERT INTO `user` (`username`, `password`, `balance`) 
             VALUES ('user_clear_password', 'my_password', '123456.50'), 
                    ('user_md5_password', '$md5_password', '654321.99'), 
                    ('user_secure_password', '$secure_password', '456789.00')";
-    $conn->query($sql);
+    $conn->exec($sql);
     $conn->commit();
     echo "Table and data have been created";
 } catch (PDOException $e) {
