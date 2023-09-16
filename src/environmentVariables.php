@@ -2,35 +2,62 @@
 
 namespace environmentVariables;
 
-require_once("loadEnvFile.php");
+require_once("envFile.php");
 
 use EnvFile;
 use Exception;
 
 abstract class _ENV_VARIABLE_SCHEMA
 {
-    static protected string $env_variable_name;
-    static protected array $allowed_values;
-    static protected mixed $default_values;
+    public static string $env_variable_name = "";
+    public static array $allowed_values = [];
+    public static mixed $default_values = null;
 }
 
 abstract class _REQUIRE_METHOD extends _ENV_VARIABLE_SCHEMA
 {
-    static string $env_variable_name = "REQUIRE_METHOD";
-    static array $allowed_values = ["SECURE", "UNSECURE"];
-    static mixed $default_values = "UNSECURE";
+    public static string $env_variable_name = "REQUIRE_METHOD";
+    public static array $allowed_values = ["SECURE", "UNSECURE"];
+    public static mixed $default_values = "UNSECURE";
+}
+
+abstract class _MARIADB_HOST extends _ENV_VARIABLE_SCHEMA
+{
+    public static string $env_variable_name = "MARIADB_HOST";
+    public static mixed $default_values = "localhost";
+}
+abstract class _MARIADB_USER extends _ENV_VARIABLE_SCHEMA
+{
+    public static string $env_variable_name = "MARIADB_USER";
+}
+
+abstract class _MARIADB_PASSWORD extends _ENV_VARIABLE_SCHEMA
+{
+    public static string $env_variable_name = "MARIADB_PASSWORD";
+}
+
+abstract class _MARIADB_DATABASE extends _ENV_VARIABLE_SCHEMA
+{
+    public static string $env_variable_name = "MARIADB_DATABASE";
+}
+
+abstract class _MARIADB_PORT extends _ENV_VARIABLE_SCHEMA
+{
+    public static string $env_variable_name = "MARIADB_PORT";
+    public static mixed $default_values = "3306";
 }
 
 abstract class Environment
 {
     static private array $classAssociation = [
-        "REQUIRE_METHOD" => _REQUIRE_METHOD::class
+        "REQUIRE_METHOD" => _REQUIRE_METHOD::class,
+        "MARIADB_HOST" => _MARIADB_HOST::class,
+        "MARIADB_USER" => _MARIADB_USER::class,
+        "MARIADB_PASSWORD" => _MARIADB_PASSWORD::class,
+        "MARIADB_DATABASE" => _MARIADB_DATABASE::class,
+        "MARIADB_PORT" => _MARIADB_PORT::class,
     ];
 
-    static private array $defaultOptions = [
-        "VAR_DEFINED" => false,
-        "VAR_STRICT" => false,
-    ];
     /**
      * Return the value of an environment variable
      * 
@@ -41,8 +68,13 @@ abstract class Environment
      * @param array $option <p>[optional] options to change the behavior of the function.</p>
      * @return mixed
      */
-    static function getEnv(string $varName, array $options = self::$defaultOptions): mixed
-    {
+    static function getEnv(
+        string $varName,
+        array $options = [
+            "VAR_DEFINED" => true,
+            "VAR_STRICT" => false,
+        ]
+    ): mixed {
         EnvFile::load();
         if (!in_array($varName, array_keys(self::$classAssociation))) { // no expected environment variable
             if ($options["VAR_DEFINED"]) // varName must be an expected environment variable. Throws an error
@@ -66,7 +98,7 @@ abstract class Environment
 
         $varValue = getenv($varName);
 
-        if (!in_array($varValue, $varClass::$allowed_values)) // ERROR: value of env variable is not in allowed_values !
+        if ($varClass::$allowed_values && !in_array($varValue, $varClass::$allowed_values)) // ERROR: value of env variable is not in allowed_values !
             throw new Exception("the value of the environment variable $varName is not in allowed_values");
 
         return $varValue;

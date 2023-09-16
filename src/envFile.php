@@ -8,7 +8,7 @@ abstract class EnvFile
     static public function load(): void
     {
         // Vérifiez si le fichier .env n'existe pas
-        if (file_exists(self::$envFilePath)) {
+        if (!file_exists(self::$envFilePath)) {
             return;
         }
         // Lisez le contenu du fichier .env
