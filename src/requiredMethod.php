@@ -4,7 +4,8 @@ require_once("allowedIncludeFiles.php");
 require_once("environmentVariables.php");
 use environmentVariables\Environment;
 
-abstract class RequiredMethod {
+abstract class RequiredMethod
+{
     const requireAssociation = [
         "SECURE" => "secureRequireOnce",
         "UNSECURE" => "unsecureRequireOnce",
@@ -12,7 +13,7 @@ abstract class RequiredMethod {
     static function secureRequireOnce(string $file): mixed
     {
         $allowedRequiredFiles = ALLOWED_INCLUDE_FILES;
-        if(in_array($file, $allowedRequiredFiles))
+        if (in_array($file, $allowedRequiredFiles))
             return require_once($file);
         return null;
     }
