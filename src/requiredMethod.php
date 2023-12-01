@@ -6,7 +6,7 @@ use environmentVariables\Environment;
 
 abstract class RequiredMethod
 {
-    const requireAssociation = [
+    private const requireAssociation = [
         "SECURE" => "secureRequireOnce",
         "UNSECURE" => "unsecureRequireOnce",
     ];

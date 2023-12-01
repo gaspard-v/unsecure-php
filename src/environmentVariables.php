@@ -21,6 +21,13 @@ abstract class _REQUIRE_METHOD extends _ENV_VARIABLE_SCHEMA
     public static mixed $default_values = "UNSECURE";
 }
 
+abstract class _PASSWORD_AUTH_TYPE extends _ENV_VARIABLE_SCHEMA
+{
+    public static string $env_variable_name = "PASSWORD_AUTH_TYPE";
+    public static array $allowed_values = ["PLAIN", "MD5", "SECURE"];
+    public static mixed $default_values = "PLAIN";
+}
+
 abstract class _MARIADB_HOST extends _ENV_VARIABLE_SCHEMA
 {
     public static string $env_variable_name = "MARIADB_HOST";
