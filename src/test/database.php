@@ -1,7 +1,7 @@
 <?php
 namespace test;
 
-require_once("../databaseOperation.php");
+require_once("src/databaseOperation.php");
 use DatabaseOperation;
 use Exception;
 use PDO;
@@ -9,14 +9,21 @@ use PDO;
 class Database
 {
     private DatabaseOperation $databaseOperation;
-    function __construct()
+    public function __construct()
     {
         try {
             $this->databaseOperation = new DatabaseOperation();
         } catch (Exception $err) {
             die($err);
         }
-        $this->databaseOperation->unsecureQuery("SELECT * FROM `user` WHERE username = :username", ["username", [PDO::PARAM_STR, "user_clear_password"]]);
+
+    }
+    public function unsecureQuery()
+    {
+        $this->databaseOperation->unsecureQuery("SELECT * FROM `user` WHERE username = :username", ["username" => [PDO::PARAM_STR, "user_clear_password"]]);
+    }
+    public function testAll()
+    {
+        $this->unsecureQuery();
     }
 }
-new Database();

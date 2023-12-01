@@ -50,12 +50,19 @@ class DatabaseOperation
     function unsecureQuery(string $query, array $parameters): array
     {
         $arrayValues = array_map(function (array $param) {
-            [, $value] = $param;
+            $quotableType = [PDO::PARAM_STR, PDO::PARAM_STR_CHAR, PDO::PARAM_STR_NATL];
+            [$type, $value] = $param;
+            if (in_array($type, $quotableType))
+                return "'$value'";
             return $value;
         }, $parameters);
 
+        $normalizedParameters = array_map(function (string $param) {
+            return ":$param";
+        }, array_keys($parameters));
+
         $query = str_replace(
-            array_keys($parameters),
+            $normalizedParameters,
             $arrayValues,
             $query
         );
