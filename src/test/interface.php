@@ -18,8 +18,7 @@ abstract class Test
      */
     public function testAll(): array
     {
-        $returnArray = array_map(function ($testFunction) {
-            [$functionName, $function] = $testFunction;
+        $returnArray = array_map(function ($functionName, $function) {
             $testObj = new TestObject($functionName);
             try {
                 $testObj->returnElement = $function();
@@ -28,7 +27,7 @@ abstract class Test
                 $testObj->errorElement = $err;
             }
             return $testObj;
-        }, $this->testFunctions);
+        }, array_keys($this->testFunctions), $this->testFunctions);
         return $returnArray;
     }
 }

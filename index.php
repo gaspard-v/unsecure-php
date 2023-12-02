@@ -1,4 +1,5 @@
 <?php
+require_once "src/requireAll.php";
 require_once("src/requiredMethod.php");
 require_once("src/pageName.php");
 

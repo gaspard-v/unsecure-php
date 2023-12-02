@@ -1,22 +1,19 @@
 <?php
 namespace test;
 
-use test\object\TestObject;
-
 require_once("src/databaseOperation.php");
+require_once("interface.php");
 use DatabaseOperation;
 use Exception;
 use PDO;
 use test\interface\Test;
-
-use function PHPSTORM_META\map;
 
 class Database extends Test
 {
     private DatabaseOperation $databaseOperation;
     public function __construct()
     {
-        $this->testFunctions = ["unsecureQuery", fn() => $this->unsecureQuery()];
+        $this->testFunctions = ["unsecureQuery" => fn() => $this->unsecureQuery()];
         try {
             $this->databaseOperation = new DatabaseOperation();
         } catch (Exception $err) {

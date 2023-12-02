@@ -1,5 +1,6 @@
 <?php
 
+require_once "src/requireAll.php";
 require_once("src/test/database.php");
 
 function launchAllTest()
