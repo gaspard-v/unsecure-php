@@ -1,11 +1,11 @@
 <?php
 
 require_once "src/requireAll.php";
-require_once("src/test/database.php");
+use test\Database;
 
 function launchAllTest()
 {
-    $dbTest = new test\Database();
+    $dbTest = new Database();
     $result = $dbTest->testAll();
     print_r($result);
 }

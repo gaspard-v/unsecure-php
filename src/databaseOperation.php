@@ -1,6 +1,5 @@
 <?php
 
-require_once("environmentVariables.php");
 use environmentVariables\Environment;
 
 class DatabaseOperation

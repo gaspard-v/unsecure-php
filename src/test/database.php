@@ -1,8 +1,7 @@
 <?php
 namespace test;
 
-require_once("src/databaseOperation.php");
-require_once("interface.php");
+require_once "interface.php";
 use DatabaseOperation;
 use Exception;
 use PDO;

@@ -1,7 +1,4 @@
 <?php
-
-require_once("allowedIncludeFiles.php");
-require_once("environmentVariables.php");
 use environmentVariables\Environment;
 
 abstract class RequiredMethod

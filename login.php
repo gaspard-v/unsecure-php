@@ -1,6 +1,3 @@
-<?php
-require_once("src/pageName.php");
-?>
 <!DOCTYPE html>
 <html>
 

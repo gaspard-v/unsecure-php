@@ -1,5 +1,4 @@
 <?php
-require_once("schema/user.php");
 use schema\User;
 
 abstract class UserOperation

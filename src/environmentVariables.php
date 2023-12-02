@@ -2,8 +2,6 @@
 
 namespace environmentVariables;
 
-require_once("envFile.php");
-
 use EnvFile;
 use Exception;
 

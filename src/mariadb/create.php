@@ -2,8 +2,6 @@
 
 use environmentVariables\Environment;
 
-require_once(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "environmentVariables.php");
-
 $server = Environment::getEnv("MARIADB_HOST");
 $user = Environment::getEnv("MARIADB_USER");
 $password = Environment::getEnv("MARIADB_PASSWORD");

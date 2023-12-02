@@ -1,8 +1,6 @@
 <?php
 namespace test\interface;
 
-require_once("testObject.php");
-
 use test\object\TestObject;
 use Exception;
 

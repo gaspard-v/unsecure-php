@@ -1,7 +1,8 @@
 <?php
-
 $srcFolder = __DIR__;
-$phpFiles = glob($srcFolder . '*.php');
+$phpFiles = glob($srcFolder . DIRECTORY_SEPARATOR . '*.php');
+$phpFiles = array_merge($phpFiles, glob($srcFolder . DIRECTORY_SEPARATOR . "schema" . DIRECTORY_SEPARATOR . '*.php'));
+$phpFiles = array_merge($phpFiles, glob($srcFolder . DIRECTORY_SEPARATOR . "test" . DIRECTORY_SEPARATOR . '*.php'));
 
 if ($phpFiles !== false) {
     foreach ($phpFiles as $file) {
