@@ -9,7 +9,7 @@ function launchAllTest()
         $dbTest = new test\Database();
         $dbTest->testAll();
     } catch (Exception $err) {
-        $errors += $err;
+        array_push($errors, $err);
     }
     print_r($errors);
 }
