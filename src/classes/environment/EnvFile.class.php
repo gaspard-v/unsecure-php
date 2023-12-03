@@ -4,7 +4,7 @@ namespace environment;
 abstract class EnvFile
 {
     // Spécifiez le chemin vers votre fichier .env
-    static private string $envFilePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '.env';
+    static private string $envFilePath = ENV_FILE_PATH;
 
     static public function load(): void
     {
