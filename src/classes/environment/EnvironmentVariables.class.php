@@ -1,8 +1,8 @@
 <?php
 
-namespace environmentVariables;
+namespace environment;
 
-use EnvFile;
+use environment\EnvFile;
 use Exception;
 
 abstract class _ENV_VARIABLE_SCHEMA
@@ -52,7 +52,7 @@ abstract class _MARIADB_PORT extends _ENV_VARIABLE_SCHEMA
     public static mixed $default_values = "3306";
 }
 
-abstract class Environment
+abstract class EnvironmentVariables
 {
     static private array $classAssociation = [
         "REQUIRE_METHOD" => _REQUIRE_METHOD::class,

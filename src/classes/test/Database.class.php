@@ -1,13 +1,12 @@
 <?php
 namespace test;
 
-require_once "interface.php";
 use DatabaseOperation;
 use Exception;
 use PDO;
-use test\interface\Test;
+use test\model\TestModel;
 
-class Database extends Test
+class Database extends TestModel
 {
     private DatabaseOperation $databaseOperation;
     public function __construct()

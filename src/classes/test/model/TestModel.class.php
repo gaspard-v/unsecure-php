@@ -1,10 +1,10 @@
 <?php
-namespace test\interface;
+namespace test\model;
 
 use test\object\TestObject;
 use Exception;
 
-abstract class Test
+abstract class TestModel
 {
     protected array $testFunctions;
     abstract public function __construct();

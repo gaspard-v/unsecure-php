@@ -1,4 +1,5 @@
 <?php
+namespace environment;
 
 abstract class EnvFile
 {

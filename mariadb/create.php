@@ -1,12 +1,12 @@
 <?php
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . "requireAll.php";
+use environment\EnvironmentVariables;
 
-use environmentVariables\Environment;
-
-$server = Environment::getEnv("MARIADB_HOST");
-$user = Environment::getEnv("MARIADB_USER");
-$password = Environment::getEnv("MARIADB_PASSWORD");
-$database = Environment::getEnv("MARIADB_DATABASE");
-$port = Environment::getEnv("MARIADB_PORT");
+$server = EnvironmentVariables::getEnv("MARIADB_HOST");
+$user = EnvironmentVariables::getEnv("MARIADB_USER");
+$password = EnvironmentVariables::getEnv("MARIADB_PASSWORD");
+$database = EnvironmentVariables::getEnv("MARIADB_DATABASE");
+$port = EnvironmentVariables::getEnv("MARIADB_PORT");
 
 $conn = new PDO("mysql:host=$server;dbname=$database;port=$port", $user, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

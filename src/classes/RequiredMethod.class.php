@@ -1,5 +1,5 @@
 <?php
-use environmentVariables\Environment;
+use environment\EnvironmentVariables;
 
 abstract class RequiredMethod
 {
@@ -20,7 +20,7 @@ abstract class RequiredMethod
     }
     static function requireOnce(string $file): mixed
     {
-        $requireMethod = Environment::getEnv("REQUIRE_METHOD");
+        $requireMethod = EnvironmentVariables::getEnv("REQUIRE_METHOD");
         $pointer = self::requireAssociation[$requireMethod];
         return call_user_func([RequiredMethod::class, $pointer], $file);
     }
